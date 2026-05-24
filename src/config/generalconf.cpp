@@ -72,13 +72,14 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
-
-    m_layout->addStretch();
-
     initShowMagnifier();
     initSquareMagnifier();
     initJpegQuality();
     initReverseArrow();
+    initShowHandles();
+
+    m_scrollAreaLayout->addStretch();
+
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -260,7 +261,7 @@ void GeneralConf::initScrollArea()
     auto* content = new QWidget(m_scrollArea);
     m_scrollArea->setWidget(content);
     m_scrollArea->setWidgetResizable(true);
-    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     content->setObjectName("content");
@@ -832,7 +833,6 @@ void GeneralConf::initShowSelectionGeometry()
 
     selGeoLayout->addWidget(m_selectGeometryLocation);
     vboxLayout->addLayout(selGeoLayout);
-    vboxLayout->addStretch();
 }
 
 void GeneralConf::initJpegQuality()
@@ -989,3 +989,19 @@ void GeneralConf::useX11LegacyScreenshotChanged(bool checked)
     ConfigHandler().setUseX11LegacyScreenshot(checked);
 }
 #endif
+
+void GeneralConf::initShowHandles()
+{
+    m_showHandles = new QCheckBox(tr("Show handles"), this);
+    m_showHandles->setToolTip(tr("Show screenshot selection handles"));
+    m_showHandles->setChecked(ConfigHandler().showHandles());
+    m_scrollAreaLayout->addWidget(m_showHandles);
+
+    connect(
+      m_showHandles, &QCheckBox::clicked, this, &GeneralConf::setShowHandles);
+}
+
+void GeneralConf::setShowHandles(bool checked)
+{
+    ConfigHandler().setShowHandles(checked);
+}

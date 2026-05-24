@@ -156,6 +156,7 @@ public:
                          setUseX11LegacyScreenshot,
                          bool)
 #endif
+    CONFIG_GETTER_SETTER(showHandles, setShowHandles, bool)
 
     // SPECIAL CASES
     bool startupLaunch();

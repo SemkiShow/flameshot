@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
+#include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 #include "widgets/capture/capturetoolbutton.h"
-
 #include <QApplication>
 #include <QEvent>
 #include <QMouseEvent>
@@ -387,8 +387,10 @@ void SelectionWidget::paintEvent(QPaintEvent*)
     p.drawRect(rect() + QMargins(0, 0, -1, -1));
     p.setRenderHint(QPainter::Antialiasing);
     p.setBrush(m_color);
-    for (auto rectangle : handlerAreas()) {
-        p.drawEllipse(rectangle);
+    if (ConfigHandler().showHandles()) {
+        for (auto rectangle : handlerAreas()) {
+            p.drawEllipse(rectangle);
+        }
     }
 }
 
