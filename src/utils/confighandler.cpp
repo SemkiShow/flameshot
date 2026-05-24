@@ -152,6 +152,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("useX11LegacyScreenshot"      ,Bool               ( false         )),
 #endif
     OPTION("showHandles"                 ,Bool               ( true         )),
+    OPTION("showSelectionSize"           ,Bool               ( true         )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {

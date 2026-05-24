@@ -71,6 +71,7 @@ private slots:
     void useX11LegacyScreenshotChanged(bool checked);
 #endif
     void setShowHandles(bool checked);
+    void setShowSelectionSize(bool checked);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -119,6 +120,7 @@ private:
     void initUseX11LegacyScreenshot();
 #endif
     void initShowHandles();
+    void initShowSelectionSize();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -177,4 +179,5 @@ private:
     QCheckBox* m_useX11LegacyScreenshot;
 #endif
     QCheckBox* m_showHandles;
+    QCheckBox* m_showSelectionSize;
 };

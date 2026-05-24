@@ -77,6 +77,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initJpegQuality();
     initReverseArrow();
     initShowHandles();
+    initShowSelectionSize();
 
     m_scrollAreaLayout->addStretch();
 
@@ -1004,4 +1005,20 @@ void GeneralConf::initShowHandles()
 void GeneralConf::setShowHandles(bool checked)
 {
     ConfigHandler().setShowHandles(checked);
+}
+
+void GeneralConf::initShowSelectionSize()
+{
+    m_showSelectionSize = new QCheckBox(tr("Show selection size"), this);
+    m_showSelectionSize->setToolTip(tr("Show screenshot selection size"));
+    m_showSelectionSize->setChecked(ConfigHandler().showSelectionSize());
+    m_scrollAreaLayout->addWidget(m_showSelectionSize);
+
+    connect(
+      m_showSelectionSize, &QCheckBox::clicked, this, &GeneralConf::setShowSelectionSize);
+}
+
+void GeneralConf::setShowSelectionSize(bool checked)
+{
+    ConfigHandler().setShowSelectionSize(checked);
 }

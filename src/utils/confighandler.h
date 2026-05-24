@@ -157,6 +157,7 @@ public:
                          bool)
 #endif
     CONFIG_GETTER_SETTER(showHandles, setShowHandles, bool)
+    CONFIG_GETTER_SETTER(showSelectionSize, setShowSelectionSize, bool)
 
     // SPECIAL CASES
     bool startupLaunch();

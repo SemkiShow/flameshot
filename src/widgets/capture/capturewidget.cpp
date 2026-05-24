@@ -325,7 +325,7 @@ CaptureWidget::~CaptureWidget()
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -727,18 +727,20 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                   selection.top() + (selection.height() - xybox.height()) / 2;
         }
 
-        QColor uicolor = ConfigHandler().uiColor();
-        uicolor.setAlpha(200);
-        painter.fillRect(
-          x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
-        painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
-                                                        : Qt::black);
-        painter.drawText(x0,
-                         y0,
-                         xybox.width(),
-                         xybox.height(),
-                         Qt::AlignVCenter | Qt::AlignHCenter,
-                         xy);
+        if (ConfigHandler().showSelectionSize()) {
+            QColor uicolor = ConfigHandler().uiColor();
+            uicolor.setAlpha(200);
+            painter.fillRect(
+              x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
+            painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
+                                                            : Qt::black);
+            painter.drawText(x0,
+                             y0,
+                             xybox.width(),
+                             xybox.height(),
+                             Qt::AlignVCenter | Qt::AlignHCenter,
+                             xy);
+        }
     }
 
     if (m_displayGrid) {
